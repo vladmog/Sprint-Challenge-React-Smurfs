@@ -4,6 +4,7 @@ import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
 import {Route, NavLink} from 'react-router-dom';
+import OneSmurf from './components/OneSmurf';
 
 class App extends Component {
   constructor(props) {
@@ -48,18 +49,26 @@ class App extends Component {
       .catch()
   }
 
+  updateHandler = (id, data) => {
+    axios.put (`http://localhost:3333/smurfs/${id}`, data)
+      .then(res => {
+        this.setState({
+          smurfs: res.data
+        })
+      })
+      .catch()
+  }
+
   render() {
     return (
       <div className="App">
         <div className = "navBar">
-          <NavLink to = "/">Smurfs</NavLink>
+          <NavLink to = "/">Smurfs  </NavLink>
           <NavLink to = "/smurf-form">Form</NavLink>
         </div>
-        <Route path = "/smurf-form" render = {props => <SmurfForm submitSmurf = {this.submitSmurf} {...props} />} />
+        <Route path = "/smurf-form" render = {props => <SmurfForm smurfs = {this.state.smurfs} submitSmurf = {this.submitSmurf} {...props} />} />
         <Route exact path = "/" render = {props => <Smurfs smurfs = {this.state.smurfs} smurfKiller = {this.smurfKiller} />} />
-        
-        {/* <SmurfForm /> */}
-        {/* <Smurfs smurfs={this.state.smurfs} /> */}
+        <Route path = "/smurf/:id" render = {(props) => <OneSmurf {...props} smurfs = {this.state.smurfs} updateHandler = {this.updateHandler}/>} /> 
       </div>
     );
   }
