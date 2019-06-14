@@ -35,9 +35,18 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
   Server-side routing is when a web page loads data as it needs it, when it needs it. This allows for a faster initial load time than client-side routing however makes for a less smooth experience from then on.
 
+
 - [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+  POST   -> CREATE  
+  GET    -> READ
+  PUT    -> UPDATE
+  DELETE -> DELETE
+
+
 - [ ] Mention three tools we can use to make AJAX requests.
 
+  axios, fetch, superagent
 
 ## Project Set Up
 
